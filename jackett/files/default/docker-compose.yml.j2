@@ -1,0 +1,16 @@
+---
+version: "2.1"
+services:
+  jackett:
+    image: {{ jackett.lookup.containers.jackett.image }}
+    container_name: jackett
+    env_file:
+      - {{ jackett.lookup.paths.config_jackett }}
+    volumes:
+      - {{ jackett.lookup.paths.data }}:/config
+{%- if jackett.lookup.paths.watch %}
+      - {{ jackett.lookup.paths.watch }}:/downloads
+{%- endif %}
+    ports:
+      - {{ jackett.container.host_port }}:{{ jackett.config.general.Port }}
+    restart: unless-stopped

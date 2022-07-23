@@ -1,0 +1,75 @@
+{
+  "template": "https://github.com/lkubb/salt-template-formula-compose",
+  "commit": "11726f9b646206ac59b1a8c04459ba61b139766a",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "_extensions": [
+        "local_extensions.YAMLDumper"
+      ],
+      "_jinja2_env_vars": {
+        "block_start_string": "{!",
+        "block_end_string": "!}",
+        "variable_start_string": "{=",
+        "variable_end_string": "=}",
+        "comment_start_string": "{@",
+        "comment_end_string": "@}"
+      },
+      "name": "Jackett",
+      "abbr": "jackett",
+      "abbr_pysafe": "jackett",
+      "project_name": "jackett",
+      "containers": "jackett",
+      "git_username": "lkubb",
+      "_lookup": {
+        "containers": {
+          "jackett": {
+            "image": "lscr.io/linuxserver/jackett:latest"
+          }
+        },
+        "paths": {
+          "data": "data",
+          "watch": ""
+        }
+      },
+      "_settings": {
+        "config": {
+          "general": {
+            "Port": 9117,
+            "AllowExternal": true,
+            "APIKey": null,
+            "AdminPassword": null,
+            "InstanceId": null,
+            "BlackholeDir": null,
+            "UpdateDisabled": false,
+            "UpdatePrerelease": false,
+            "BasePathOverride": null,
+            "BaseUrlOverride": null,
+            "CacheEnabled": true,
+            "CacheTtl": 2100,
+            "CacheMaxResultsPerIndexer": 1000,
+            "FlareSolverrUrl": null,
+            "FlareSolverrMaxTimeout": 55000,
+            "OmdbApiKey": null,
+            "OmdbApiUrl": null,
+            "ProxyType": 0,
+            "ProxyUrl": null,
+            "ProxyPort": null,
+            "ProxyUsername": null,
+            "ProxyPassword": null,
+            "ProxyIsAnonymous": true
+          }
+        },
+        "container": {
+          "host_port": 9117,
+          "userns_keep_id": true,
+          "pgid": null,
+          "puid": null,
+          "tz": "Etc/UTC"
+        }
+      },
+      "_template": "https://github.com/lkubb/salt-template-formula-compose"
+    }
+  },
+  "directory": null
+}

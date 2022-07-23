@@ -1,0 +1,74 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+#
+# Set default values.
+---
+values:
+  lookup:
+    rootgroup: root
+    compose:
+      create_pod: null
+      pod_args: null
+      project_name: jackett
+      remove_orphans: true
+      service:
+        container_prefix: null
+        ephemeral: true
+        pod_prefix: null
+        restart_policy: on-failure
+        separator: null
+        stop_timeout: null
+    paths:
+      base: /opt/containers/jackett
+      compose: docker-compose.yml
+      config_jackett: jackett.env
+      data: data
+      watch: ''
+    user:
+      groups: []
+      home: null
+      name: jackett
+      shell: /usr/sbin/nologin
+      uid: null
+      gid: null
+    containers:
+      jackett:
+        image: lscr.io/linuxserver/jackett:latest
+  install:
+    rootless: true
+    remove_all_data_for_sure: false
+  config:
+    general:
+      APIKey: null
+      AdminPassword: null
+      AllowExternal: true
+      BasePathOverride: null
+      BaseUrlOverride: null
+      BlackholeDir: null
+      CacheEnabled: true
+      CacheMaxResultsPerIndexer: 1000
+      CacheTtl: 2100
+      FlareSolverrMaxTimeout: 55000
+      FlareSolverrUrl: null
+      InstanceId: null
+      OmdbApiKey: null
+      OmdbApiUrl: null
+      Port: 9117
+      ProxyIsAnonymous: true
+      ProxyPassword: null
+      ProxyPort: null
+      ProxyType: 0
+      ProxyUrl: null
+      ProxyUsername: null
+      UpdateDisabled: false
+      UpdatePrerelease: false
+  container:
+    host_port: 9117
+    pgid: null
+    puid: null
+    tz: Etc/UTC
+    userns_keep_id: true
+  # Just here for testing
+  added_in_defaults: defaults_value
+  winner: defaults
+...
