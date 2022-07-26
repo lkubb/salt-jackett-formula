@@ -43,6 +43,9 @@ Jackett user account is absent:
     - purge: {{ jackett.install.remove_all_data_for_sure }}
     - require:
       - Jackett is absent
+    - retry:
+        attempts: 5
+        interval: 2
 
 {%- if jackett.install.remove_all_data_for_sure %}
 

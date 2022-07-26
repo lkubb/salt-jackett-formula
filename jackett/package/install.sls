@@ -22,6 +22,8 @@ Jackett user session is initialized at boot:
   compose.lingering_managed:
     - name: {{ jackett.lookup.user.name }}
     - enable: {{ jackett.install.rootless }}
+    - require:
+      - user: {{ jackett.lookup.user.name }}
 
 Jackett paths are present:
   file.directory:
