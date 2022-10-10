@@ -12,6 +12,9 @@ jackett:
       pod_args: null
       project_name: jackett
       remove_orphans: true
+      build: false
+      build_args: null
+      pull: false
       service:
         container_prefix: null
         ephemeral: true
