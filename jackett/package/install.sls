@@ -71,3 +71,15 @@ Jackett is installed:
     - require:
       - user: {{ jackett.lookup.user.name }}
 {%- endif %}
+
+{%- if jackett.install.autoupdate_service is not none %}
+
+Podman autoupdate service is managed for Jackett:
+{%-   if jackett.install.rootless %}
+  compose.systemd_service_{{ "enabled" if jackett.install.autoupdate_service else "disabled" }}:
+    - user: {{ jackett.lookup.user.name }}
+{%-   else %}
+  service.{{ "enabled" if jackett.install.autoupdate_service else "disabled" }}:
+{%-   endif %}
+    - name: podman-auto-update.timer
+{%- endif %}

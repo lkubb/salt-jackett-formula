@@ -6,6 +6,10 @@ services:
     container_name: jackett
     env_file:
       - {{ jackett.lookup.paths.config_jackett }}
+{%- if jackett.install.autoupdate %}
+    labels:
+      - io.containers.autoupdate=registry
+{%- endif %}
     volumes:
       - {{ jackett.lookup.paths.data }}:/config
 {%- if jackett.lookup.paths.watch %}
