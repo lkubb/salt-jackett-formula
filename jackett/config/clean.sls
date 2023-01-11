@@ -14,5 +14,6 @@ Jackett environment files are absent:
   file.absent:
     - names:
       - {{ jackett.lookup.paths.config_jackett }}
+      - {{ jackett.lookup.paths.base | path_join(".saltcache.yml") }}
     - require:
       - sls: {{ sls_service_clean }}
