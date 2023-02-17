@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
+{%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as jackett with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
 
@@ -35,11 +34,28 @@ Jackett paths are present:
     - require:
       - user: {{ jackett.lookup.user.name }}
 
+{%- if jackett.install.podman_api %}
+
+Jackett podman API is enabled:
+  compose.systemd_service_enabled:
+    - name: podman
+    - user: {{ jackett.lookup.user.name }}
+    - require:
+      - Jackett user session is initialized at boot
+
+Jackett podman API is available:
+  compose.systemd_service_running:
+    - name: podman
+    - user: {{ jackett.lookup.user.name }}
+    - require:
+      - Jackett user session is initialized at boot
+{%- endif %}
+
 Jackett compose file is managed:
   file.managed:
     - name: {{ jackett.lookup.paths.compose }}
-    - source: {{ files_switch(['docker-compose.yml', 'docker-compose.yml.j2'],
-                              lookup='Jackett compose file is present'
+    - source: {{ files_switch(["docker-compose.yml", "docker-compose.yml.j2"],
+                              lookup="Jackett compose file is present"
                  )
               }}
     - mode: '0644'
