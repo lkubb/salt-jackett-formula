@@ -39,7 +39,7 @@ Jackett config file is managed:
     - mode: '0644'
     - user: {{ jackett.lookup.user.name }}
     - group: {{ jackett.lookup.user.name }}
-    - makedirs: True
+    - makedirs: true
     - template: jinja
     - require:
       - user: {{ jackett.lookup.user.name }}
