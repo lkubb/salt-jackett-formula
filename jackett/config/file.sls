@@ -26,7 +26,7 @@ Jackett environment files are managed:
     - template: jinja
     - require:
       - user: {{ jackett.lookup.user.name }}
-    - watch_in:
+    - require_in:
       - Jackett is installed
     - context:
         jackett: {{ jackett | json }}
@@ -43,8 +43,6 @@ Jackett config file is managed:
     - template: jinja
     - require:
       - user: {{ jackett.lookup.user.name }}
-    - watch_in:
-      - Jackett is installed
     - dataset: {{ jackett.config.general | json }}
 
 # There are also tracker-specific config files in `Jackett/Indexers/<>.json`.

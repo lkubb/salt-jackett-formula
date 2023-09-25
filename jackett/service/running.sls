@@ -34,3 +34,4 @@ Jackett service is running:
 {%- endif %}
     - watch:
       - Jackett is installed
+      - sls: {{ sls_config_file }}
