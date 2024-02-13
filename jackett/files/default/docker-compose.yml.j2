@@ -1,3 +1,18 @@
+{%- set is_netfs = {} %}
+{%- for path in ["data", "watch"] %}
+{%-   if not jackett.lookup.paths[path] %}
+{%-     continue %}
+{%-   endif %}
+{%-   do is_netfs.update({
+        path: salt["cmd.run_stdout"](
+          "df -P '{data}' | ".format(data=jackett.lookup.paths[path]) ~
+          "awk 'BEGIN {e=1} $NF ~ /^\/.+/ { e=0 ; print $1 ; exit } END { exit e }'",
+          python_shell=true,
+        )
+      })
+-%}
+{%- endfor -%}
+
 ---
 version: "2.1"
 services:
@@ -11,9 +26,9 @@ services:
       - io.containers.autoupdate=registry
 {%- endif %}
     volumes:
-      - {{ jackett.lookup.paths.data }}:/config
+      - {{ jackett.lookup.paths.data }}:/config{%- if not is_netfs.data %}:z{%- endif %}
 {%- if jackett.lookup.paths.watch %}
-      - {{ jackett.lookup.paths.watch }}:/downloads
+      - {{ jackett.lookup.paths.watch }}:/downloads{%- if not is_netfs.watch %}:z{%- endif %}
 {%- endif %}
     ports:
       - {{ jackett.container.host_port }}:{{ jackett.config.general.Port }}
